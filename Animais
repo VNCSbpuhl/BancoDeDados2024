@@ -91,63 +91,68 @@ insert into Animais values (null, 'prof. pardal', '2012-4-4', 1.7   , 'amarelo',
 insert into Animais values (null, 'mobie'		, '2014-5-2', 5069.4, 'branca' , 6);
 insert into Animais values (null, 'batman'		, '2013-7-1', 96.1  , 'preto'  , 3);
 
-#1 - Selecione o nome e a espécie de todos os animais.
-SELECT Animais.nome, Especies.nome FROM
-Animais JOIN Especies ON
-Especies.id = Animais.especie_id;
+--Busca Base
+select * from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id;
 
-#2 - Selecione todos os gatos laranja.
-SELECT Animais.cor, Especies.nome
-FROM Animais
-JOIN Especies on Especies.id = Animais.especie_id
-WHERE Especies.nome = 'gato' and Animais.cor = 'laranja';
+--Selecione o nome e a espécie de todos os animais​
+select Animais.nome as Animais, Especies.nome as Especies from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id;
 
-#3 - Selecione todos os cachorros da cor amarelo.
-SELECT Animais.cor, Especies.nome
-FROM Animais
-JOIN Especies on Especies.id = Animais.especie_id
-WHERE Especies.nome = 'cachorro' and Animais.cor = 'amarelo';
+--Selecione todos os gatos laranja​
+select Animais.nome as Animais, Especies.nome as Especies from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id where
+Animais.cor = 'laranja' and Especies.nome = 'gato';
 
-#4 - Selecione todos os animais aquáticos que pesam mais que 70 Kg.
-SELECT Animais.nome, Animais.peso, Especies.nome AS especie
-FROM Animais
-JOIN Especies ON Especies.id = Animais.especie_id
-WHERE Especies.alimentacao = 'herbívoro' OR Especies.alimentacao = 'carnívoro'
-AND Animais.peso > 70;
+--Selecione todos os cachorros da cor amarelo​
+select Animais.nome as Animais, Especies.nome as Especies from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id where
+Animais.cor = 'amarelo' and Especies.nome = 'cachorro';
 
-#5 - Selecione todos os herbívoro ordenados pelos mais pesados. 
-SELECT Animais.nome, Animais.peso, Especies.nome AS especie
-FROM Animais
-JOIN Especies ON Especies.id = Animais.especie_id
-WHERE Especies.alimentacao = 'herbívoro'
-ORDER BY Animais.peso DESC;
+--Selecione todos os animais aquáticos que pesam mais que 70 Kg​
+select * from Animais right join Especies on
+Animais.especie_id = Especies.id where
+Animais.peso > 70 and Animais.cor = 'branca';
 
-#6 - Selecione todos os carnívoro que são pretos e brancos.
-SELECT Animais.cor, Especies.nome
-FROM Animais
-JOIN Especies ON Especies.id = Animais.especie_id
-WHERE Especies.alimentacao = 'carnívoro' and Animais.cor = 'preto' 
-or Animais.cor = 'branco';
+--Selecione todos os herbívoro ordenados pelos mais pesados​
+select Animais.nome, Especies.alimentacao from 
+Animais left join Especies on
+Animais.especie_id = Especies.id where
+Especies.alimentacao = 'herbívoro' order by
+Animais.peso;
 
-#7 - Selecione todos os onívoros que nasceram antes de 2013.
-SELECT Animais.nome, Animais.data_nasc, Especies.nome AS especie
-FROM Animais
-JOIN Especies ON Especies.id = Animais.especie_id
-WHERE Especies.alimentacao = 'onívoro' AND YEAR(Animais.data_nasc) < 2013;
+--Selecione todos os carnívoro que são pretos e brancos​
+select Animais.nome, Especies.alimentacao, Animais.cor from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id where
+Especies.alimentacao = 'carnívoro' and Animais.cor in 
+('preto', 'branco', 'branca', 'preta');
 
-#8 - Selecione todos os mamíferos que pesam mais que 10 quilos e são marrons ou azul.
-SELECT Animais.nome, Animais.peso, Animais.cor
-FROM Animais
-JOIN Especies ON Especies.id = Animais.especie_id
-WHERE Especies.alimentacao = 'mamíferos' AND Animais.peso > 10 
-AND Animais.cor = 'marrom' OR Animais.cor = 'azul';
+--Selecione todos os onívoros que nasceram antes de 2013​
+select Animais.nome, Especies.alimentacao from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id where
+Especies.alimentacao = 'onívoro' and 
+Animais.data_nasc < '2013-01-01';
 
-#9 - Selecione a quantidade total de animais. 
-SELECT COUNT(*) AS quantidade_total
-FROM Animais;
+--Selecione todos os mamiferos que pesam mais que 10 quilos e são marrons ou azul​
+select Animais.nome, Especies.alimentacao from 
+Animais inner join Especies on
+Animais.especie_id = Especies.id where
+Animais.peso > 10 and Animais.cor in ('marrons', 'azul')
 
-#10 - Se somarmos os pesos de todos os gatos, qual será o resultado? 
-SELECT SUM(peso) AS peso_total_gatos
-FROM Animais
-JOIN Especies ON Especies.id = Animais.especie_id
-WHERE Especies.nome = 'gato';
+--(Desafio) Selecione a quantidade total de animais​
+select COUNT(*) from Animais left join Especies on
+Animais.especie_id = Especies.id;
+
+select COUNT(*) from Animais;
+select COUNT(*) from Especies;
+
+--(Desafio) Se somarmos os peso de todos os gatos, qual será o resultado?
+select SUM(Animais.peso) from Animais right join Especies on
+Animais.especie_id = Especies.id where
+Especies.nome = 'gato';
