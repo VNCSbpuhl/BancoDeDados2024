@@ -156,3 +156,7 @@ select COUNT(*) from Especies;
 select SUM(Animais.peso) from Animais right join Especies on
 Animais.especie_id = Especies.id where
 Especies.nome = 'gato';
+
+#Exercícios novos:
+
+#Altere o nome do Pateta para Goofy;
