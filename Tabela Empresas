@@ -108,7 +108,16 @@ insert into produtos values (null, 'banana'				, 0081, 100, '2016-5-8', true , 5
 insert into produto_fornecedor values (1,1);
 insert into produto_fornecedor values (4,1);
 
+Aula:
+--Os 10 produtos mais caros:
+CREATE VIEW Top10MaisCaros AS
+SELECT prod_id, nome_prod, valor, qtd_estoque
+FROM produtos
+ORDER BY valor DESC
+OFFSET 0 ROW FETCH FIRST 10 ROW ONLY;
 
+
+--Exercícios:
 #Selecione quantos produtos cada marca possui.​
 
 #Selecione o preço médio dos produtos de cada marca.​
