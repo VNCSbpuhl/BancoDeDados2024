@@ -107,3 +107,26 @@ insert into produtos values (null, 'banana'				, 0081, 100, '2016-5-8', true , 5
 
 insert into produto_fornecedor values (1,1);
 insert into produto_fornecedor values (4,1);
+
+
+#Selecione quantos produtos cada marca possui.​
+
+#Selecione o preço médio dos produtos de cada marca.​
+
+#Selecione a média dos preços e total em estoque dos produtos agrupados por marca.​
+
+#Selecione quantos produtos estão cadastrados.​
+
+#Selecione o preço médio dos produtos.​
+
+#Selecione a média dos preços dos produtos em 2 grupos: perecíveis e não perecíveis.​
+
+#Selecione a média dos preços dos produtos agrupados pelo nome do produto.​
+
+#Selecione a média dos preços e total em estoque dos produtos.​
+
+#Selecione o nome, marca e quantidade em estoque do produto mais caro.​
+
+#Selecione os produtos com preço acima da média.​
+
+#Selecione a quantidade de produtos de cada nacionalidade.
